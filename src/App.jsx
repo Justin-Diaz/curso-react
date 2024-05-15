@@ -1,15 +1,11 @@
 import { useState } from 'react'
 import './App.css'
 import confetti from 'canvas-confetti';
-//importar el componente square
+
 import { Square } from './components/Square';
-//importar constantes
 import { TURNS } from './constants';
-
 import { checkWinnerFrom, checkEndGame } from './logic/board';
-
 import { WinnerModal } from './components/WinnerModal';
-
 import { saveGameToStorage, resetGameStorage } from './logic/storage';
 
 function App() {
@@ -20,16 +16,14 @@ function App() {
     const boardFromStorage = window.localStorage.getItem('board');
     //si hay partida guardada la muestra, sino muestra la partida nueva
     return boardFromStorage? JSON.parse(boardFromStorage) : Array(9).fill(null);
-  }
+  });
 
-  );
   //turno de los jugadores
   const [turn, setTurn] =useState(() => {
     const turnFromStorage = window.localStorage.getItem('turn');
     return turnFromStorage?? TURNS.X; 
-  }
-
-  );
+  });
+  
   //asignar un ganador
   //(null)=no hay ganador, (false)=hay un empate
   const [winner, setWinner] = useState(null);
